@@ -1,0 +1,29 @@
+# Cargo build files
+/target/
+
+# Build output
+**/*.rlib
+**/*.rmeta
+
+# Executables and temporary files
+*.exe
+*.log
+*.out
+*.tmp
+*.bak
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Git
+*.orig
+
+# Optional: dotenv if you're using env files
+.env
