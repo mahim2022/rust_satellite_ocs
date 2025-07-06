@@ -1,0 +1,45 @@
+Yes, Student B will need to make minimal additions to your current files. Here's exactly what and where they need to add code, with guidance:
+
+the communication.rs module is needed to be done by you and then do the following to add it to our current program in the following manner
+
+✅ 1. main.rs
+📍 Where: Top of the file
+Add this line to import the communication module:
+
+rust
+Copy code
+mod communication; // NEW
+use communication::simulate_communication;
+📍 Where: Inside the scheduled_tasks list
+Near your existing ScheduledTask::new(...) entries, add this one:
+
+rust
+Copy code
+ScheduledTask::new(
+    "Communication",
+    500, // Adjust as needed (e.g., every 500ms)
+    TaskPriority::Low,
+    Box::new(|| Box::pin(async {
+        simulate_communication();
+        tokio::time::sleep(std::time::Duration::from_millis(80)).await;
+    })),
+),
+✅ 2. task_scheduler.rs
+No changes needed here. The existing scheduling infrastructure supports the communication task as-is.
+
+✅ 3. New File: communication.rs
+Student B should create this new file in src/ to keep their logic separate:
+
+rust
+Copy code
+// src/communication.rs
+
+pub fn simulate_communication() {
+    println!("↪ [Comm] Handling satellite communication...");
+    // TODO: Add command parsing, sending acknowledgments, etc.
+}
+✅ Summary of Where to Add Code
+
+main.rs->Top of file->mod communication; and use communication::*
+main.rs->Inside scheduled_tasks vector->Add "Communication" task using ScheduledTask::new
+src/ directory->Create communication.rs->Define simulate_communication() function

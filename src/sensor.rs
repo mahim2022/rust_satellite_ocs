@@ -96,7 +96,16 @@ pub async fn run_sensor_loop(
         let mut buf = buffer.lock().await;
 
 
-        buf.push(data);
+        buf.push(data.clone());
+        // Append to CSV
+        if let Ok(mut file) = OpenOptions::new()
+        .create(true)
+        .append(true)
+        .open("sensor_data.csv")
+{
+    let csv_line = format!("{:?},{},{:?}\n", data.sensor_type, data.value, data.emitted_at);
+    let _ = file.write_all(csv_line.as_bytes());
+}
 
         last_expected_time = expected_time;
         sleep(Duration::from_millis(config.interval_ms)).await;

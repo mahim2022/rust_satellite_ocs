@@ -1,0 +1,73 @@
+Satellite Onboard Control System (OCS)
+RTS2505 Assignment – Real-Time Systems
+Language: Rust
+Author: Student A
+
+📁 Project Structure
+graphql
+
+satellite_ocs/
+├── src/
+│   ├── main.rs            # Main runtime: sensor loop, task scheduler
+│   ├── sensor.rs          # Sensor simulation and buffer
+│   ├── task_scheduler.rs  # Task scheduler with drift and preemption
+│   └── analyze.rs         # Data analysis CLI tool (bonus binary)
+├── sensor_data.csv        # Logged sensor data (generated at runtime)
+├── Cargo.toml             # Project metadata and dependencies
+🔧 Prerequisites
+Rust (stable, 2021+ edition recommended)
+
+Cargo build system (comes with Rust)
+
+Install Rust if not installed:
+
+sh
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+🚀 Running the OCS System
+sh
+
+RUST_LOG=info cargo run --bin satellite_ocs
+This will:
+
+Start the simulated sensors (Thermal, Gyro, Camera)
+
+Start the task scheduler with multiple tasks
+
+Log drift, jitter, and safety alerts
+
+Create sensor_data.csv with sensor readings
+
+📊 Analyzing Logged Data
+After running the simulation:
+
+sh
+
+cargo run --bin analyze
+This will:
+
+Open sensor_data.csv
+
+Compute sensor counts and average values
+
+Output the summary in the terminal
+
+✅ Features Covered
+Real-time task drift and preemption simulation
+
+Sensor data jitter and data loss handling
+
+Safety alert on thermal sensor misses
+
+CSV logging for analysis
+
+Bonus: analysis tool in a separate binary
+
+📎 Notes
+Output CSV is stored in the root directory: sensor_data.csv
+
+Clean old logs before reruns if needed
+
+Use RUST_LOG=debug to increase verbosity
+
